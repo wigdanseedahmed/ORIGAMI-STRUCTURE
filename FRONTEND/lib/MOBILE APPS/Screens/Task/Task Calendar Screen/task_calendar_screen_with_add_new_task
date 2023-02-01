@@ -1,0 +1,591 @@
+import 'package:origami_structure/imports.dart';
+import 'package:flutter/services.dart' as root_bundle;
+
+class TaskCalendarScreen extends StatefulWidget {
+  static const String id = 'task_calendar_screen';
+  const TaskCalendarScreen({Key? key}) : super(key: key);
+
+  @override
+  _TaskCalendarScreenState createState() => _TaskCalendarScreenState();
+}
+
+class _TaskCalendarScreenState extends State<TaskCalendarScreen>
+    with TickerProviderStateMixin {
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  late File jsonFile;
+
+  bool fileExists = false;
+
+  late SharedPreferences prefs;
+
+  late Map<DateTime, List> allTasks;
+  late Map<DateTime, List<TaskModel>> taskBuffer;
+
+  late List<TaskModel> jsonFileContent = <TaskModel>[];
+  late List<TaskModel> readJsonFileContent = <TaskModel>[];
+
+  final CalendarFormat _calendarFormat = CalendarFormat.week;
+
+  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff;
+
+  final TextEditingController _taskController = TextEditingController();
+
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+  final TextEditingController _projectNameController = TextEditingController();
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _uidController = TextEditingController();
+
+  final DateTime _dateChangeController = DateTime(2022,09,01);
+  DateTime _selectedDate = DateTime.now();
+  DateTime _focusedDate = DateTime.now();
+  DateTime? _rangeStart;
+  DateTime? _rangeEnd;
+
+  final String _status = "ToDo";
+  final String _startTime = "8:30 AM";
+  final String _endTime = "9:30 AM";
+  final String _dueTime = "9:30 AM";
+
+  String filePath = "/Users/izzy/StudioProjects/origami_structure/jsonFile/task_data.json";
+  String dir = '/Users/izzy/StudioProjects/origami_structure';
+  String fileName = 'jsonFile/task_data.json';
+
+  final int _durationController = 0;
+  final int _selectedColor = 0;
+
+  final List  _activity = [];
+  final List _members = [];
+  final List _checkListController = [];
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getTask1().then((val) => setState(() {
+        allTasks = val;
+      }));
+      //print( ' ${_events.toString()} ');
+    });
+    _selectedDate = _focusedDate;
+    taskBuffer = {};
+    allTasks = {};
+    jsonFileContent = [];
+    readJsonFileContent =[];
+    super.initState();
+  }
+
+  Future<Map<DateTime, List>> getTask1() async {
+    Map<DateTime, List> mapFetch = {};
+    for (int i = 0; i < readJsonFileContent.length; i++) {
+      var createTime = DateTime(readJsonFileContent[i].date.year,
+          readJsonFileContent[i].date.month, readJsonFileContent[i].date.day);
+      var original = mapFetch[createTime];
+      if (original == null) {
+        print("null");
+        mapFetch[createTime] = [readJsonFileContent[i].title];
+      } else {
+        //  print(event[i].revisionLocation);
+        mapFetch[createTime] = List.from(original)
+          ..addAll([readJsonFileContent[i].title]);
+      }
+    }
+    print(mapFetch);
+    return mapFetch;
+  }
+
+  List<dynamic> _getTasksForDay(DateTime dateTime) {
+    return allTasks[dateTime] ?? [];
+  }
+
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    if (!isSameDay(_selectedDate, selectedDay)) {
+      setState(() {
+        _selectedDate = selectedDay;
+        _focusedDate = focusedDay;
+        _rangeStart = null; // Important to clean those
+        _rangeEnd = null;
+        _rangeSelectionMode = RangeSelectionMode.toggledOff;
+      });
+      if (kDebugMode) {
+        print(_focusedDate);
+      }
+      //_selectedTasks.value = _getTasksForDay(selectedDay);
+    }
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _projectNameController.dispose();
+    _taskController.dispose();
+    super.dispose();
+  }
+
+  bool _checkFileExists() {
+    jsonFile = File(dir + "/" + fileName);
+    if (jsonFile.existsSync() == true) {
+      fileExists = true;
+    }else{
+      fileExists = false;
+    }
+    return fileExists;
+  }
+
+  void createFile(List<TaskModel>? content, String fileName) {
+    if (kDebugMode) {
+      print("Creating file!");
+    }
+    File file = File(filePath);
+    file.createSync();
+    fileExists = true;
+    file.writeAsStringSync(json.encode(content));
+  }
+
+  Future<List<TaskModel>> readingTasksJsonData() async {
+    final jsonData = await root_bundle.rootBundle.loadString(fileName);
+    readJsonFileContent = taskModelFromJson(jsonData);
+    return readJsonFileContent;
+  }
+
+  Future<List<TaskModel>> writeToJsonFile(List<TaskModel>? taskModel) async {
+    if (kDebugMode) {
+      print("Writing to file!");
+    }
+    final jsonData = await root_bundle.rootBundle.loadString(fileName);
+    readJsonFileContent = taskModelFromJson(jsonData);
+    jsonFile = File(dir + "/" + fileName);
+    _checkFileExists();
+    if (fileExists == true) {
+      if (kDebugMode) {
+        print("File exists");
+      }
+      jsonFileContent.addAll(readJsonFileContent);
+      jsonFileContent.addAll(taskModel!);
+      jsonFile.writeAsStringSync(taskModelToJson(jsonFileContent));
+    } else {
+      if (kDebugMode) {
+        print("File does not exist!");
+      }
+      createFile(readJsonFileContent, fileName);
+    }
+    setState(() => jsonFileContent = taskModelFromJson(jsonData));
+    return jsonFileContent;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
+      body: SafeArea(
+        child: FutureBuilder(
+          future: readingTasksJsonData(),
+          builder: (context, data){
+          return Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 15.0,
+                  right: 30.0,
+                  top: 30.0,
+                  bottom: 30.0,
+                ),
+                child: _buildTableCalendarWithBuilders(),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Expanded(
+                  child: _buildSavedEventList(),
+              ),
+            ],
+          );
+        },
+        ),
+      ),
+      floatingActionButton: _buildFloatingActionButton(context),
+    );
+  }
+
+  Widget _buildTableCalendarWithBuilders() {
+    return TableCalendar(
+      /// earliest possible date
+      firstDay: kFirstDayTask,
+      /// latest allowed date
+      lastDay: kLastDayTask,
+      /// today's date
+      focusedDay: _focusedDate,
+      /// as per the documentation 'selectedDayPredicate' needs to determine current selected day.
+      selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
+      rangeStartDay: _rangeStart,
+      rangeEndDay: _rangeEnd,
+      /// default view when displayed
+      calendarFormat: _calendarFormat,
+      rangeSelectionMode: _rangeSelectionMode,
+      /// default is Sunday but can be changed according to locale
+      startingDayOfWeek: StartingDayOfWeek.saturday,
+      /// default is Saturday & Sunday but can be set to any day.
+      /// instead of day, a number can be mentioned as well.
+      weekendDays:const [DateTime.friday],
+      /// height between the day row and 1st date row, default is 16.0
+      daysOfWeekHeight: 20.0,
+      /// height between the date rows, default is 52.0
+      rowHeight: 60.0,
+      ///Day Changed
+      onDaySelected: _onDaySelected,
+      /// this property needs to be added to show events
+      eventLoader: _getTasksForDay,
+      /// Calendar Header Styling
+      headerStyle: const HeaderStyle(
+        formatButtonVisible: false,
+        titleTextStyle: TextStyle(
+          color: Color(0xFF00003f),
+          fontSize: 28.0,
+          fontWeight: FontWeight.w600,
+        ),
+        leftChevronIcon: Icon(
+          Icons.chevron_left,
+          color: Color(0xFF00003f),
+          size: 28.0,
+        ),
+        rightChevronIcon: Icon(
+          Icons.chevron_right,
+          color: Color(0xFF00003f),
+          size: 28.0,
+        ),
+      ),
+      ///To style the Days of Week
+      daysOfWeekStyle: const DaysOfWeekStyle(
+        weekdayStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 18.0,
+        ),
+        weekendStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 18.0,
+        ),
+      ),
+      ///To style the Calendar
+      calendarStyle: const CalendarStyle(
+        /// Use `CalendarStyle` to customize the UI
+        outsideDaysVisible: false,
+        isTodayHighlighted: true,
+        /// highlighted color for today
+        todayTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w600,
+        ),
+        todayDecoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+            bottomLeft: Radius.circular(10.0),
+          ),
+        ),
+        /// highlighted color for selected day
+        selectedTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 24.0,
+          fontWeight: FontWeight.w600,
+        ),
+        selectedDecoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+            bottomLeft: Radius.circular(10.0),
+          ),
+        ),
+        /// highlighted color for weekend day
+        weekendTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w600,
+        ),
+        weekendDecoration: BoxDecoration(
+          color: Colors.white54,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+            bottomLeft: Radius.circular(10.0),
+          ),
+        ),
+        defaultTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w600,
+        ),
+        defaultDecoration: BoxDecoration(
+          color: Colors.white54,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+            bottomLeft: Radius.circular(10.0),
+          ),
+        ),
+      ),
+      ///
+      calendarBuilders: CalendarBuilders(
+        markerBuilder: (context, date, events) {
+          if(events.isNotEmpty){
+            return Positioned(
+              left: 1,
+              bottom: 1,
+              child: _buildEventsMarker(date, events),
+            );
+          }
+        },
+      ),
+      );
+  }
+
+  Widget _buildSavedEventList() {
+    var _tasksFilter = readJsonFileContent.where((element) =>
+    element.date.year == _selectedDate.year && element.date.month == _selectedDate.month
+        && element.date.day == _selectedDate.day,);
+    bool _value = false;
+
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              borderRadius:
+              const BorderRadius.only(
+                topLeft: Radius.circular(60.0),
+                topRight: Radius.circular(60.0),
+              ),
+              color: DynamicTheme.of(context)?.brightness == Brightness.light
+                  ? Colors.white : Colors.grey.shade800,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0, top: 30.0),
+            child: (_tasksFilter.isEmpty)
+              ? const Text(
+            "No tasks are due this month!",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black, fontSize: 16,),)
+              : ListView(
+            children: _tasksFilter
+                .map((task) => Container(
+                child: (task is TaskModel)
+                    ? TaskCard(
+                  taskTitle: task.title,
+                  taskProjectName: task.projectName,
+                  taskDueDate: DateFormat('EE').format(task.date) + '  ' +
+                      DateFormat.MMMd().format(task.date),
+                  taskDueTime: DateFormat.jm().format(task.date),
+                  colour: labelColours[task.colour],
+                  taskStatus: task.status,
+                ) : null),).toList(),
+          ),
+          ),
+        ],
+      )
+    );
+  }
+
+  Widget _buildEventsMarker(DateTime date, List events) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: date == _selectedDate
+            ? Colors.black
+            : date == DateTime.now()
+            ? Colors.black
+            : Colors.blueGrey[800],
+      ),
+      width: 20.0,
+      height: 20.0,
+      // child: Center(
+      //   child: Text(
+      //     '${events.length}',
+      //     style: TextStyle().copyWith(
+      //       color: Colors.white,
+      //       fontSize: 12.0,
+      //     ),
+      //   ),
+      // ),
+    );
+  }
+
+  FloatingActionButton _buildFloatingActionButton(BuildContext context) {
+    return FloatingActionButton.extended(
+      onPressed: () => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text(
+            "New Task",
+            style: TextStyle(
+              color: kCannonPink,
+            ),
+          ),
+          content: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                taskTextField(
+                  validator: (value) => TaskDescriptionValidator.validate(value!),
+                  controller: _projectNameController,
+                  hint: 'Enter Project Name',
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+
+                taskTextField(
+                  validator: (value) => TaskTitleValidator.validate(value!),
+                  controller: _titleController,
+                  hint: 'Enter Title',
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                taskTextField2(
+                  validator: (value) => TaskDueTimeValidator.validate(value!),
+                  onTap: () {},
+                  hint: 'Enter Due Time',
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                "Cancel",
+                style: TextStyle(
+                  color: kMeteorite,
+                ),
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              onPressed: () {
+                if (_titleController.text.isEmpty &&
+                    _projectNameController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please enter project name & title'),
+                      duration: Duration(seconds: 3),
+                    ), );
+                  //Navigator.pop(context);
+                  return;
+                } else {
+                  setState(() {
+                    if (taskBuffer[_selectedDate] != null) {
+                      taskBuffer[_selectedDate]?.add(
+                        TaskModel(
+                          title: _titleController.text,
+                          projectName: _projectNameController.text,
+                          date: _selectedDate,
+                          dateChange: _dateChangeController,
+                          dateCreate: DateTime.now(),
+                          duration: _durationController,
+                          id: _idController.text,
+                          note: _noteController.text,
+                          status: _status,
+                          uid: _uidController.text,
+                          startTime: _startTime,
+                          endTime: _endTime,
+                          dueTime: _dueTime,
+                          members: _members,
+                          activity: _activity,
+                          colour: _selectedColor,
+                          checkList: _checkListController,
+                        ),
+                      );
+                      writeToJsonFile(taskBuffer[_selectedDate]);
+                    }
+                    else {
+                      taskBuffer[_selectedDate] = [
+                        TaskModel(
+                          title: _titleController.text,
+                          projectName: _projectNameController.text,
+                          date: _selectedDate,
+                          dateChange: _dateChangeController,
+                          dateCreate: DateTime.now(),
+                          duration: _durationController,
+                          id: _idController.text,
+                          note: _noteController.text,
+                          status: _status,
+                          uid: _uidController.text,
+                          startTime: _startTime,
+                          endTime: _endTime,
+                          dueTime: _dueTime,
+                          members: _members,
+                          activity: _activity,
+                          colour: _selectedColor,
+                          checkList: _checkListController,
+                        )
+                      ];
+                      writeToJsonFile(taskBuffer[_selectedDate]);
+                    }
+                    },
+                  );
+                  _titleController.clear();
+                  _projectNameController.clear();
+                  _idController.clear();
+                  _noteController.clear();
+                  _uidController.clear();
+                  jsonFileContent.clear();
+                  taskBuffer.clear();
+                  Navigator.pop(context);
+                  return;
+                }
+              },
+              child: const Text(
+                'Add',
+                style: TextStyle(
+                  color: kMeteorite,
+                ),
+              ),
+            ),
+          ],
+
+        ),
+      ),
+      label: const Text(
+        "Add Task",
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+      backgroundColor:Colors.deepPurpleAccent,
+      //icon: Icon(Icons.add),
+    );
+  }
+
+}
+
+
+/* Widget _buildEventList() {
+    return Scaffold(
+        backgroundColor: DynamicTheme.of(context)?.brightness == Brightness.light
+            ? Colors.white : Colors.grey.shade800,
+        body: Padding(
+          padding: const EdgeInsets.only(left: 10.0,),
+          child: ListView(
+              children: _listOfDayTasks(_selectedDay).map(
+                    (TaskModel task) => TaskCard(
+                  taskTitle: task.title,
+                  taskDescription: task.detail,
+                  taskDueDate: DateFormat('EE').format(task.date) + '  ' +
+                      DateFormat.MMMd().format(task.date),
+                  taskDueTime: DateFormat.jm().format(task.date),
+                ),).toList()),
+        ),
+    );
+  }  */

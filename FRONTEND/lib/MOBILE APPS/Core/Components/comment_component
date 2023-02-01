@@ -1,0 +1,852 @@
+import 'package:flutter/cupertino.dart';
+import 'package:origami_structure/imports.dart';
+import 'package:nb_utils/nb_utils.dart';
+
+class TestingScreen extends StatefulWidget {
+  static const String id = 'testing_screen';
+
+  const TestingScreen({Key? key}) : super(key: key);
+
+  @override
+  _TestingScreen createState() => _TestingScreen();
+}
+
+class _TestingScreen extends State<TestingScreen> {
+  var dateTime = DateTime.now();
+  var editCont = TextEditingController();
+  List<BoardDetailOptionModel> boardDetailOptionModel = [];
+  List<CardMembersModel> cardMembersModel = [];
+
+  bool showLabel = true;
+  bool showMembers = false;
+  bool add = false;
+  bool? showActivity = false;
+  String? _selected;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future _dueDate(context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Due Date',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: SizedBox(
+            width: 450,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                !add
+                    ? GestureDetector(
+                        onTap: () {
+                          add = true;
+                          setState(() {});
+                        },
+                        child: Row(
+                          children: const [
+                            Icon(Icons.access_time_rounded),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Text('Add Due Date...'),
+                          ],
+                        ),
+                      )
+                    : Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: const Text('Enter date'),
+                              value: _selected,
+                              items: const [
+                                DropdownMenuItem(
+                                    child: Text('Today'), value: 's')
+                              ],
+                              onChanged: (String? value) {
+                                _selected = value;
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Expanded(
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: const Text('Enter time'),
+                              value: _selected,
+                              items: const [
+                                DropdownMenuItem(
+                                  child: Text('Today'),
+                                  value: 's',
+                                )
+                              ],
+                              onChanged: (String? value) {
+                                _selected = value;
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20.0,
+                          ),
+                          GestureDetector(
+                              onTap: () {
+                                add = false;
+                                setState(() {});
+                              },
+                              child: const Icon(Icons.cancel_rounded))
+                        ],
+                      ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                const Text(
+                  'Set Reminder',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                !add
+                    ? GestureDetector(
+                        onTap: () {
+                          add = true;
+                          setState(() {});
+                        },
+                        child: Row(
+                          children: const [
+                            Icon(Icons.access_time_rounded),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Text('Add Due Date...'),
+                          ],
+                        ),
+                      )
+                    : Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: const Text('set Reminder'),
+                              value: _selected,
+                              items: const [
+                                DropdownMenuItem(
+                                    child: Text('Today'), value: 's')
+                              ],
+                              onChanged: (String? value) {
+                                _selected = value;
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20.0,
+                          ),
+                          GestureDetector(
+                              onTap: () {
+                                add = false;
+                                setState(() {});
+                              },
+                              child: const Icon(Icons.cancel_rounded))
+                        ],
+                      ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                const Text(
+                    "Reminders are only sent to members and watchers of the card",
+                    style: TextStyle(fontSize: 14)),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                finish(context);
+              },
+              child: Text('Cancel'.toUpperCase()),
+            ),
+            TextButton(
+              onPressed: () {
+                finish(context);
+              },
+              child: Text('Done'.toUpperCase()),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void _memberDialog() async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Card Members',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: CardMemberWidget(cardMembersModel: cardMembersModel),
+        );
+      },
+    );
+    setState(() {});
+  }
+
+  init() async {
+    boardDetailOptionModel.add(
+        BoardDetailOptionModel(name: "labels", icon: const Icon(Icons.label)));
+    boardDetailOptionModel.add(BoardDetailOptionModel(
+        name: "MembersMembers", icon: const Icon(Icons.person_outline)));
+    boardDetailOptionModel.add(BoardDetailOptionModel(
+        name: "Due DateDue Date", icon: const Icon(Icons.date_range)));
+    boardDetailOptionModel.add(BoardDetailOptionModel(
+        name: "ChecklistChecklist",
+        icon: const Icon(Icons.check_box_outlined)));
+    boardDetailOptionModel.add(BoardDetailOptionModel(
+        name: "AttachmentsAttachments", icon: const Icon(Icons.attach_file)));
+
+    cardMembersModel.add(CardMembersModel(
+        name: 'ankit',
+        profileImg:
+            "https://i.pinimg.com/564x/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg",
+        userName: "@ankit"));
+    cardMembersModel.add(CardMembersModel(
+        name: 'ankit',
+        profileImg:
+            "https://i.pinimg.com/564x/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg",
+        userName: "@ankit"));
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) super.setState(fn);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    showMembers = false;
+    for (var element in cardMembersModel) {
+      if (element.isActive) showMembers = true;
+    }
+
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF4F5F7),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CardDetailTopBarComponent(name: 'ankit'),
+              addDescription(),
+              // detailsOptions(),
+              ListView(
+                shrinkWrap: true,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            toast('Coming Soon');
+                          },
+                          child: Row(
+                            children: const [
+                              Icon(Icons.label),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              Text('labels'),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        !showMembers
+                            ? GestureDetector(
+                                onTap: () {
+                                  _memberDialog();
+                                },
+                                child: Row(
+                                  children: const [
+                                    Icon(Icons.person_outline),
+                                    SizedBox(
+                                      width: 20.0,
+                                    ),
+                                    Text('Members'),
+                                  ],
+                                ),
+                              )
+                            : GestureDetector(
+                                onTap: () {
+                                  _memberDialog();
+                                },
+                                child: SizedBox(
+                                  height: 75,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(Icons.person_outline),
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: cardMembersModel.length,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index) {
+                                          CardMembersModel data =
+                                              cardMembersModel[index];
+                                          return Container(
+                                            margin:
+                                                const EdgeInsets.only(left: 10),
+                                            child: CircleAvatar(
+                                                    radius: 22,
+                                                    backgroundImage:
+                                                        Image.network(data
+                                                                .profileImg!)
+                                                            .image)
+                                                .visible(data.isActive),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            _dueDate(context);
+                          },
+                          child: Row(
+                            children: const [
+                              Icon(Icons.date_range),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              Text('Due Date'),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            toast('Coming Soon');
+                          },
+                          child: Row(
+                            children: const [
+                              Icon(Icons.check_box_outlined),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              Text('Checklist'),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            toast('Coming Soon');
+                          },
+                          child: Row(
+                            children: const [
+                              Icon(Icons.attach_file),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              Text('Attachment'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(
+                thickness: 2,
+              ),
+
+              Container(
+                padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.local_activity_rounded,
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        Text(
+                          'Activity',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    PopupMenuButton(
+                      icon: const Icon(
+                        Icons.more_vert_outlined,
+                        size: 20,
+                      ),
+                      itemBuilder: (context) {
+                        List<PopupMenuEntry<Object>> list = [];
+                        list.add(
+                          PopupMenuItem(
+                            child: CheckboxListTile(
+                                contentPadding: const EdgeInsets.all(0),
+                                title: const FittedBox(
+                                    child: Text('Show Activity')),
+                                onChanged: (bool? value) {
+                                  showActivity = value;
+                                  setState(() {});
+                                },
+                                value: showActivity),
+                          ),
+                        );
+                        return list;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(thickness: 2),
+              CommentComponent(name: 'ankit'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget detailsOptions() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: boardDetailOptionModel.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            if (boardDetailOptionModel[index].name == 'Members') {
+              _memberDialog();
+            } else if (boardDetailOptionModel[index].name == 'labels') {
+              toast('value');
+            } else {
+              _dueDate(context);
+            }
+          },
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: Row(
+              children: [
+                boardDetailOptionModel[index].icon!,
+                const SizedBox(
+                  width: 20.0,
+                ),
+                Text(boardDetailOptionModel[index].name!),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget addDescription() {
+    return Container(
+      decoration: boxDecorationRoundedWithShadow(0,
+          offset: const Offset(3, 6), spreadRadius: 0, blurRadius: 5),
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        maxLines: 5,
+        minLines: 1,
+        style: const TextStyle(fontSize: 16, color: Colors.black),
+        cursorColor: Colors.white,
+        decoration: commentTaskTextFieldInputDecoration(
+            hintText: "Edit card description",
+            color: Colors.black,
+            padding: const EdgeInsets.fromLTRB(0, 8, 0, 8)),
+        keyboardType: TextInputType.emailAddress,
+        controller: editCont,
+        onFieldSubmitted: (v) {
+          editCont.text = v;
+          setState(() {});
+        },
+      ),
+    );
+  }
+}
+
+///CARD DETAIL TOP BAR COMPONENT
+class CardDetailTopBarComponent extends StatefulWidget {
+  final String? name;
+
+  const CardDetailTopBarComponent({
+    Key? key,
+    this.name,
+  }) : super(key: key);
+
+  @override
+  _CardDetailTopBarComponentState createState() =>
+      _CardDetailTopBarComponentState();
+}
+
+class _CardDetailTopBarComponentState extends State<CardDetailTopBarComponent> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color(0xFF0079BE),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back, color: Color(0xFFFFFFFF)),
+                onPressed: () {
+                  finish(context);
+                },
+              ),
+              IconButton(
+                  icon: const Icon(
+                    Icons.more_vert_outlined,
+                    color: Color(0xFFFFFFFF),
+                  ),
+                  onPressed: () {
+                    toast('Coming soon');
+                  }),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              widget.name!,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 16,
+              bottom: 16,
+            ),
+            child: Text('Prokit in list Proapps list',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+
+___________________________________________________________
+import 'package:origami_structure/imports.dart';
+import 'package:nb_utils/nb_utils.dart';
+
+class CommentComponent extends StatefulWidget {
+  final String? name;
+
+  CommentComponent({this.name});
+
+  @override
+  _CommentComponentState createState() => _CommentComponentState();
+}
+
+class _CommentComponentState extends State<CommentComponent> {
+  List<CommentModel> commentList = [];
+  String selectedEmoji = '';
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() async {}
+
+  @override
+  void setState(fn) {
+    if (mounted) super.setState(fn);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+      child: Column(
+        children: [
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              CommentModel data = commentList[index];
+              return Container(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: CircleAvatar(
+                          radius: 25,
+                          backgroundImage: Image.network(data.image!).image),
+                    ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                data.userName!,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              PopupMenuButton(
+                                itemBuilder: (context) {
+                                  List<PopupMenuEntry<Object>> list = [];
+                                  list.add(
+                                    const PopupMenuItem(
+                                        child: Text('Edit'), value: 'Edit'),
+                                  );
+                                  list.add(
+                                    const PopupMenuItem(
+                                        child: Text('Delete'), value: 'Delete'),
+                                  );
+                                  return list;
+                                },
+                                onSelected: (dynamic v) {
+                                  if (v == 'Edit') {
+                                    data.focus = true;
+                                  } else {
+                                    commentList.remove(data);
+                                  }
+                                  setState(() {});
+                                },
+                              ),
+                            ],
+                          ),
+                          TextField(
+                            controller:
+                                TextEditingController(text: data.content),
+                            maxLines: 6,
+                            minLines: 1,
+                            keyboardType: TextInputType.text,
+                            autofocus: data.focus!,
+                            onSubmitted: (v) {
+                              data.content = v;
+                              data.focus = false;
+                              setState(() {});
+                            },
+                            style: const TextStyle(fontSize: 12),
+                            decoration: const InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              isDense: true,
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                  margin: const EdgeInsets.only(top: 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(12, 4, 12, 4),
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: IconButton(
+                                    icon: const Icon(
+                                      Icons.emoji_emotions_sharp,
+                                    ),
+                                    onPressed: () {
+                                      // showDialog(
+                                      //   useSafeArea: true,
+                                      //   builder: (_) => EmojiPicker(
+                                      //     buttonMode: ButtonMode.CUPERTINO,
+                                      //     rows: 3,
+                                      //     columns: 7,
+                                      //     recommendKeywords: ["racing", "horse"],
+                                      //     numRecommended: 5,
+                                      //     onEmojiSelected: (Emoji emoji, Category category) {
+                                      //       data.selectedEmoji = emoji.emoji;
+                                      //       setState(() {});
+                                      //       finish(context);
+                                      //     },
+                                      //   ),
+                                      //   context: context,
+                                      // );
+                                    },
+                                  )).visible(
+                                data.selectedEmoji == null || data.selectedEmoji!.isEmpty,
+                                defaultWidget: Container(
+                                    margin: const EdgeInsets.only(top: 5),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(12, 4, 12, 4),
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        /*    showDialog(
+                                        useSafeArea: true,
+                                        builder: (_) => EmojiPicker(
+                                          buttonMode: ButtonMode.CUPERTINO,
+                                          rows: 3,
+                                          columns: 7,
+                                          recommendKeywords: ["racing", "horse"],
+                                          numRecommended: 5,
+                                          onEmojiSelected: (Emoji emoji, Category category) {
+                                            data.selectedEmoji = emoji.emoji;
+                                            setState(() {});
+                                            finish(context);
+                                          },
+                                        ),
+                                        context: context,
+                                      );*/
+                                      },
+                                      child: Text(
+                                        data.selectedEmoji!,
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                              ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              Text(data.time!),
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+            itemCount: commentList.length,
+            separatorBuilder: (BuildContext context, int index) {
+              return const Divider();
+            },
+          ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          Row(
+            children: [
+              const Icon(
+                Icons.messenger_outline_outlined,
+                color: Colors.grey,
+              ),
+              const SizedBox(
+                width: 20.0,
+              ),
+              Expanded(
+                child: TextFormField(
+                  controller: TextEditingController(
+                    text: '',
+                  ),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                  cursorColor: Colors.grey,
+                  minLines: 1,
+                  decoration: commentTaskTextFieldInputDecoration(
+                      color: Colors.grey,
+                      hintText: 'Add comment',
+                      padding: const EdgeInsets.fromLTRB(0, 8, 0, 8)),
+                  onFieldSubmitted: (v) {
+                    commentList.add(
+                      CommentModel(
+                          image:
+                              'https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+                          content: v,
+                          focus: false,
+                          selectedEmoji: selectedEmoji,
+                          userName: widget.name,
+                          time: 'Just now'),
+                    );
+                    selectedEmoji = '';
+                    setState(() {});
+                  },
+                ),
+              ),
+              const SizedBox(
+                width: 10.0,
+              ),
+              const Icon(
+                Icons.attach_file_outlined,
+                color: Colors.grey,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

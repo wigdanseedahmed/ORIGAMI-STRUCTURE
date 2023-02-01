@@ -1,0 +1,690 @@
+[
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "1",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Head of Exploration",
+    "username": "Wigdan_Seedahmed",
+    "firstName": "Wigdan",
+    "lastName": "Seedahmed",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "1",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "wigdan.seedahmed@undp.org",
+    "workEmail": "wigdan.seedahmed@undp.org",
+    "personalEmail": "wigdan.seedahmed@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 90 586 1445",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Head of Exploration",
+        "contractType": "UN Employee",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "2",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Visual Anthropologist",
+    "username": "Muhammed_Aljeally",
+    "firstName": "Muhammed",
+    "lastName": "Aljeally",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "2",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "male",
+    "email": "muhammed.aljeally@undp.org",
+    "workEmail": "muhammed.aljeally@undp.org",
+    "personalEmail": "muhammed.aljeally@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 90 685 7394",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Visual Anthropologist",
+        "contractType": "UNV",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "3",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Statistician",
+    "username": "Anjom_Yagoub",
+    "firstName": "Anjom",
+    "lastName": "Yagoub",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "3",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "anjom.yagoub@undp.org",
+    "workEmail": "anjom.yagoub@undp.org",
+    "personalEmail": "anjom.yagoub@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 99 360 4960",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Statistician",
+        "contractType": "UNV",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "4",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Research Analysis",
+    "username": "Dima_Hamuda",
+    "firstName": "Dima",
+    "lastName": "Hamuda",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "4",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "Dima.Hamuda@undp.org",
+    "workEmail": "Dima.Hamuda@undp.org",
+    "personalEmail": "Dima.Hamuda@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Research Analysis",
+        "contractType": "UNV",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "5",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Research support officer",
+    "username": "Hannah_Urayo",
+    "firstName": "Hannah",
+    "lastName": "Urayo",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "5",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "hannah.urayo@undp.org",
+    "workEmail": "hannah.urayo@undp.org",
+    "personalEmail": "hannah.urayo@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 92 891 6667",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Research support analyst",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "6",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Data Scientist",
+    "username": "Islam_Mohamed_Ali",
+    "firstName": "Islam",
+    "lastName": "Mohamed Ali",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "6",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "islam.mohamedali@undp.org",
+    "workEmail": "islam.mohamedali@undp.org",
+    "personalEmail": "islam.mohamedali@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 91 610 8178",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Data Scientist",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "7",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Mathematician",
+    "username": "Isra_Mohammed",
+    "firstName": "Isra",
+    "lastName": "Mohammed",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "7",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "isra.mohammed@undp.org",
+    "workEmail": "isra.mohammed@undp.org",
+    "personalEmail": "isra.mohammed@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 92 729 5452",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Mathematician",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "8",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Public health research analyst",
+    "username": "muhamed_maher",
+    "firstName": "Muhamed",
+    "lastName": "Maher",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "8",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "male",
+    "email": "muhamed.maher@undp.org",
+    "workEmail": "muhamed.maher@undp.org",
+    "personalEmail": "muhamed.maher@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 91 278 7141",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Public health research analyst",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "9",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Knowledge Management Specialist",
+    "username": "rwan_amien",
+    "firstName": "Rwan",
+    "lastName": "Amien",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "9",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "rwan.amien@undp.org",
+    "workEmail": "rwan.amien@undp.org",
+    "personalEmail": "rwan.amien@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 91 800 4855",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Knowledge Management Specialist",
+        "contractType": "UNV",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "10",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Interactive Media Specialist",
+    "username": "Abubakr_Abdelbagi",
+    "firstName": "Abubakr",
+    "lastName": "Abdelbagi",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "10",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "male",
+    "email": "abubakr.abdelbagi@undp.org",
+    "workEmail": "abubakr.abdelbagi@undp.org",
+    "personalEmail": "abubakr.abdelbagi@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Interactive Media Specialist",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "11",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Research support officer",
+    "username": "Nihal_Ibrahim",
+    "firstName": "Nihal",
+    "lastName": "Ibrahim",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "11",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "nihal.ibrahim@undp.org",
+    "workEmail": "nihal.ibrahim@undp.org",
+    "personalEmail": "nihal.ibrahim@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 92 891 6667",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Research support analyst",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "12",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Future thinking specialist",
+    "username": "Gada_Kadoda",
+    "firstName": "Gada",
+    "lastName": "Kadoda",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "12",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "gadoda@gmail.com",
+    "workEmail": "gadoda@gmail.com",
+    "personalEmail": "gadoda@gmail.com",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 92 259 9843",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Future thinking specialist",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "id": "13",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Socio-cultural geospatial analyst",
+    "username": "Rawan_Hassan",
+    "firstName": "Rawan",
+    "lastName": "Hassan",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "13",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "Rawan.hassan@undp.org",
+    "workEmail": "Rawan.hassan@undp.org",
+    "personalEmail": "Rawan.hassan@undp.org",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Socio-cultural geospatial analyst",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  },
+  {
+    "id": "14",
+    "jobDepartment": "UNDP Accelerator Lab",
+    "jobTeam": "Exploration Team",
+    "jobTitle": "Software Developer",
+    "username": "Israa_Hassan_Bashier",
+    "firstName": "Israa",
+    "lastName": "Hassan Bashier",
+    "userPhotoURL": "https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg",
+    "userID": "14",
+    "dateOfBirth": "1990-01-01T11:15:00Z",
+    "gender": "female",
+    "email": "israa.bashir@undp.org",
+    "workEmail": "israa.bashir@undp.org",
+    "personalEmail": "Izzymohamed109@yahoo.com",
+    "password": "password123",
+    "confirmedPassword": "password123",
+    "phoneNumber": "+249 96 660 9220",
+    "nationality": "Sudanese",
+    "countryOfEmployment": "Sudan",
+    "dateUpdated": "2022-01-14T10:17:40Z",
+    "dateCreate": "2022-01-14T10:17:40Z",
+    "languages": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Arabic",
+        "level": "Mother tongue"
+      }
+    ],
+    "bachelors": "bachelors",
+    "masters": "masters",
+    "phd": "phd",
+    "doctoral": "doctoral",
+    "workExperience": [],
+    "qualifications": [],
+    "competence": [],
+    "skills": [
+      {
+        "skills": "Software Developer",
+        "contractType": "IC",
+        "startDate": "2020-01-10T10:17:40Z",
+        "dueDate": "2023-04-10T10:17:40Z",
+        "duration": 1095
+      }
+    ]
+  }
+]
+
+
